@@ -10,13 +10,15 @@ namespace GraphicalTestApp
     {
         static void Main(string[] args)
         {
-            Game game = new Game(1280, 760, "Graphical Test Application");
+            Game game = new Game(1280, 960, "Yes.YeetYeet");
 
             Actor root = new Actor();
             game.Root = root;
 
-            //## Set up game here ##//
+            TankBody noob = new TankBody(150, 150, "noobdog.png");
 
+            root.AddChild(noob);
+            //## Set up game here ##//
             game.Run();
         }
     }

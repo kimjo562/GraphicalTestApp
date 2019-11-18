@@ -20,65 +20,122 @@ namespace GraphicalTestApp
 
         private Matrix3 _localTransform = new Matrix3();
         private Matrix3 _globalTransform = new Matrix3();
-        
+
+        // The Entity's location on the X axis
         public float X
         {
             //## Implement the relative X coordinate ##//
-            get { return 0; }
-            set { }
+            // get { return 0; }
+            // set { }
+            get
+            {
+                return _localTransform.m1x3;
+            }
+            set
+            {
+                _localTransform.SetTranslation(value, Y, 1);
+                UpdateTransform();
+            }
         }
+
         public float XAbsolute
         {
             //## Implement the absolute X coordinate ##//
-            get { return 0; }
+            // get { return 0; }
+            get { return _globalTransform.m1x3; }
         }
+
+        // The Entity's location on the Y axis
         public float Y
         {
             //## Implement the relative Y coordinate ##//
-            get { return 0; }
-            set { }
+            // get { return 0; }
+            // set { }
+            get
+            {
+                return _localTransform.m2x3;
+            }
+            set
+            {
+                _localTransform.SetTranslation(X, value, 1);
+                UpdateTransform();
+            }
         }
         public float YAbsolute
         {
             //## Implement the absolute Y coordinate ##//
-            get { return 0; }
+            // get { return 0; }
+            get { return _globalTransform.m2x3; }
         }
 
         public float GetRotation()
         {
             //## Implement getting the rotation of _localTransform ##//
-            return 0;
+            return (float)Math.Atan2(_localTransform.m2x1, _localTransform.m1x1);
+            // return 0;
         }
 
         public void Rotate(float radians)
         {
             //## Implement rotating _localTransform ##//
+            _localTransform.RotateZ(radians);
+            UpdateTransform();
         }
 
         public float GetScale()
         {
             //## Implement getting the scale of _localTransform ##//
-            return 0;
+            // return 0;
+            return 1;
         }
 
         public void Scale(float scale)
         {
             //## Implement scaling _localTransform ##//
+            _localTransform.Scale(scale, scale, 1);
+            UpdateTransform();
         }
 
         public void AddChild(Actor child)
         {
             //## Implement AddChild(Actor) ##//
+            // Make sure the child already have a parent
+            if (child != null && child.Parent != null)
+            {
+                return;
+            }
+            // Assign this Entity as the child's parent
+            child.Parent = this;
+            // Add new child to collection
+            _children.Add(child);
         }
 
         public void RemoveChild(Actor child)
         {
             //## Implement RemoveChild(Actor) ##//
+            bool isMyChild = _children.Remove(child);
+            if (isMyChild)
+            {
+                child.Parent = null;
+                child._localTransform = child._globalTransform;
+            }
         }
 
         public void UpdateTransform()
         {
             //## Implment UpdateTransform() ##//
+            if(Parent != null)
+            {
+                _globalTransform = Parent._globalTransform * _localTransform;
+            }
+            else
+            {
+                _globalTransform = _localTransform;
+            }
+            foreach (Actor child in _children)
+            {
+                child.UpdateTransform();
+            }
         }
 
         //Call the OnStart events of the Actor and its children
