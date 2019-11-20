@@ -25,19 +25,14 @@ namespace GraphicalTestApp
         {
             _image = RL.LoadImage(path);
             _texture = RL.LoadTextureFromImage(_image);
-            X = -Width / 2;
-            Y = -Height / 2;
+            X = -Width;
+            Y = -Height;
         }
 
         //Draw the Sprite to the screen
         public override void Draw()
         {
-            RL.DrawTextureEx(
-                _texture,
-                new Vector2(XAbsolute, YAbsolute),
-                GetRotation() * (float)(180.0f / Math.PI),
-                GetScale(),
-                Color.WHITE);
+            RL.DrawTextureEx(_texture, new Vector2(XAbsolute, YAbsolute), GetRotationAbsolute() * (float)(180.0f / Math.PI), GetScale(), Color.WHITE);
             base.Draw();
         }
     }

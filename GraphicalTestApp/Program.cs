@@ -15,10 +15,12 @@ namespace GraphicalTestApp
             Actor root = new Actor();
             game.Root = root;
 
-            TankBody noob = new TankBody(150, 150, "noobdog.png");
+            TankBody bodyTank = new TankBody(150, 150, "tankBlue.png");
+            root.AddChild(bodyTank);
 
-            root.AddChild(noob);
+
             //## Set up game here ##//
+
             game.Run();
         }
     }
