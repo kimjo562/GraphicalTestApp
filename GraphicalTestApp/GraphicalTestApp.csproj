@@ -54,6 +54,7 @@
     <Compile Include="Input.cs" />
     <Compile Include="Matrix3.cs" />
     <Compile Include="Matrix4.cs" />
+    <Compile Include="Pilot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sprite.cs" />

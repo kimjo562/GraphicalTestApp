@@ -11,6 +11,7 @@ namespace GraphicalTestApp
         private Sprite _texture;
         private AABB _hitbox;
         private TankTurret tankBarrel;
+        protected bool isEntered = false;
 
         public TankBody(int x, int y, string path) : base(x, y)
         {
@@ -20,14 +21,13 @@ namespace GraphicalTestApp
             AddChild(_texture);
             AddChild(_hitbox);
             AddChild(tankBarrel);
+            isEntered = false;
 
             OnUpdate += MoveUp;
             OnUpdate += MoveDown;
-            // OnUpdate += MoveLeft;
-            // OnUpdate += MoveRight;
-
             OnUpdate += TurnRight;
             OnUpdate += TurnLeft;
+
         }
 
         public TankBody(string path) : this(0, 0, path)
@@ -38,7 +38,7 @@ namespace GraphicalTestApp
 
         public void MoveUp(float deltaTime)
         {
-            if (Input.IsKeyDown(265))
+            if (Input.IsKeyDown(265) && isEntered == true)
             {
                 Vector3 facing = new Vector3(Getm1x1, Getm1x2, 1) * deltaTime * 50;
                 X += facing.x;
@@ -54,7 +54,7 @@ namespace GraphicalTestApp
 
         public void MoveDown(float deltaTime)
         {
-            if (Input.IsKeyDown(264))
+            if (Input.IsKeyDown(264) && isEntered == true)
             {
                 Vector3 facing = new Vector3(Getm1x1, Getm1x2, 1) * deltaTime * -50;
                 X += facing.x;
@@ -68,38 +68,9 @@ namespace GraphicalTestApp
             }
         }
 
-        public void MoveLeft(float deltaTime)
-        {
-            if (Input.IsKeyDown(263))
-            {
-                Vector3 facing = new Vector3(Getm1x1, Getm1x2, 1) * deltaTime * -50;
-                XAcceleration += facing.x;
-                YAcceleration += facing.y;
-            }
-            if (Input.IsKeyReleased(263))
-            {
-                ZeroSpeed();
-            }
-        }
-
-        public void MoveRight(float deltaTime)
-        {
-            if (Input.IsKeyDown(262))
-            {
-                Vector3 facing = new Vector3(Getm1x1, Getm1x2, 1) * deltaTime * 50;
-                XAcceleration += facing.x;
-                YAcceleration += facing.y;
-            }
-            if (Input.IsKeyReleased(262))
-            {
-                ZeroSpeed();
-            }
-
-        }
-
         public void TurnRight(float deltaTime)
         {
-            if (Input.IsKeyDown(262))
+            if (Input.IsKeyDown(262) && isEntered == true)
             {
                 Rotate(deltaTime);
             }
@@ -111,7 +82,7 @@ namespace GraphicalTestApp
 
         public void TurnLeft(float deltaTime)
         {
-            if (Input.IsKeyDown(263))
+            if (Input.IsKeyDown(263) && isEntered == true)
             {
                 Rotate(-deltaTime);
             }
