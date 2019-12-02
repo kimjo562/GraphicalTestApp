@@ -113,25 +113,27 @@ namespace GraphicalTestApp
         public void AddChild(Actor child)
         {
             //## Implement AddChild(Actor) ##//
-            // Make sure the child already have a parent
-            if (child != null && child.Parent != null)
+            bool isChild = _children.Contains(child);
+            if (!isChild)
             {
-                return;
+                // Adds to the addition waiting queue
+                // Add new child to collection
+                _additions.Add(child);
+                // Assign this Entity as the child's parent
+                child.Parent = this;
             }
-            // Assign this Entity as the child's parent
-            child.Parent = this;
-            // Add new child to collection
-            _children.Add(child);
         }
 
         public void RemoveChild(Actor child)
         {
             //## Implement RemoveChild(Actor) ##//
-            bool isMyChild = _children.Remove(child);
-            if (isMyChild)
+            // Checks if child exists in the collection, if so set parent = null then add to removals
+            bool isChild = _children.Contains(child);
+            if (isChild)
             {
+                // Adds to the removal waiting queue
+                _removals.Add(child);
                 child.Parent = null;
-                child._localTransform = child._globalTransform;
             }
         }
 

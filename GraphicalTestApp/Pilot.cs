@@ -85,6 +85,31 @@ namespace GraphicalTestApp
 
         }
 
+
+        public void TurnRight(float deltaTime)
+        {
+            if (Input.IsKeyDown(262) && isEntered == true)
+            {
+                Rotate(deltaTime);
+            }
+            if (Input.IsKeyReleased(262))
+            {
+                ZeroSpeed();
+            }
+        }
+
+        public void TurnLeft(float deltaTime)
+        {
+            if (Input.IsKeyDown(263) && isEntered == true)
+            {
+                Rotate(-deltaTime);
+            }
+            if (Input.IsKeyReleased(263))
+            {
+                ZeroSpeed();
+            }
+        }
+
         public void ZeroSpeed()
         {
             XVelocity = 0;
@@ -94,25 +119,27 @@ namespace GraphicalTestApp
         }
 
 
-        // Add sword as a child
+        // Pilot enters the tank and drives it
         private void EnterTank(float deltaTime)
         {
             if (Input.IsKeyDown(90))
             {
                 isEntered = true;
                 AddChild(bodyTank);
-                bodyTank.X = 1f;
-                bodyTank.Y = 0.5f;
+                Parent.RemoveChild(bodyTank);
+                bodyTank.X = XAbsolute;
+                bodyTank.Y = YAbsolute;
             }
 
         }
 
-        // Drops the sword
+        // Gets off the tank and pilot moves on its own
         private void ExitTank(float deltaTime)
         {
             if (Input.IsKeyDown(88))
             {
                 RemoveChild(bodyTank);
+                Parent.AddChild(bodyTank);
                 isEntered = false;
             }
            // root.AddChild(bodyTank);
