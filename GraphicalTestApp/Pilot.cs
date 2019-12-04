@@ -30,6 +30,8 @@ namespace GraphicalTestApp
             OnUpdate += TurnLeft;
             OnUpdate += TurnRight;
 
+            OnUpdate += PilotReset;
+
             OnUpdate += EnterTank;
             OnUpdate += ExitTank;
         }
@@ -42,9 +44,9 @@ namespace GraphicalTestApp
 
         public void MoveUp(float deltaTime)
         {
-            if (Input.IsKeyDown(265))
+            if (Input.IsKeyDown(265) && isEntered == false)
             {
-                YAcceleration -= (0.1f * deltaTime);
+                YAcceleration = (-100f);
             }
             if (Input.IsKeyReleased(265))
             {
@@ -54,9 +56,9 @@ namespace GraphicalTestApp
 
         public void MoveDown(float deltaTime)
         {
-            if (Input.IsKeyDown(264))
+            if (Input.IsKeyDown(264) && isEntered == false)
             {
-                YAcceleration += (0.1f * deltaTime);
+                YAcceleration = (100f);
             }
             if (Input.IsKeyReleased(264))
             {
@@ -68,7 +70,7 @@ namespace GraphicalTestApp
         {
             if (Input.IsKeyDown(263) && isEntered == false)
             {
-                XAcceleration -= (0.1f * deltaTime);
+                XAcceleration = (-100f);
             }
             if (Input.IsKeyReleased(263))
             {
@@ -80,7 +82,7 @@ namespace GraphicalTestApp
         {
             if (Input.IsKeyDown(262) && isEntered == false)
             {
-                XAcceleration += (0.1f * deltaTime);
+                XAcceleration = (100f);
             }
             if (Input.IsKeyReleased(262))
             {
@@ -94,7 +96,7 @@ namespace GraphicalTestApp
         {
             if (Input.IsKeyDown(262) && isEntered == true)
             {
-                Rotate(deltaTime);
+                Rotate(deltaTime * 2f);
             }
             if (Input.IsKeyReleased(262))
             {
@@ -106,7 +108,7 @@ namespace GraphicalTestApp
         {
             if (Input.IsKeyDown(263) && isEntered == true)
             {
-                Rotate(-deltaTime);
+                Rotate(-deltaTime * 2f);
             }
             if (Input.IsKeyReleased(263))
             {
@@ -126,15 +128,15 @@ namespace GraphicalTestApp
         // Pilot enters the tank and drives it
         private void EnterTank(float deltaTime)
         {
-            if (Input.IsKeyDown(90))
-            {
-                isEntered = true;
+            if (Input.IsKeyPressed(90))
+            { 
                 AddChild(bodyTank);
                 Parent.RemoveChild(bodyTank);
                 bodyTank.X = 0;
                 bodyTank.Y = 0;
 
-               // RemoveChild(_hitbox);
+                isEntered = true;
+                // RemoveChild(_hitbox);
                 RemoveChild(_texture);
             }
 
@@ -143,16 +145,31 @@ namespace GraphicalTestApp
         // Gets off the tank and pilot moves on its own
         private void ExitTank(float deltaTime)
         {
-            if (Input.IsKeyDown(88))
+            if (Input.IsKeyPressed(88))
             {
                 RemoveChild(bodyTank);
                 Parent.AddChild(bodyTank);
 
+                bodyTank.X = XAbsolute;
+                bodyTank.Y = YAbsolute;
+
                 AddChild(_texture);
                 AddChild(_hitbox);
+
+                Rotate(-GetRotation());
+
                 isEntered = false;
             }
-           // root.AddChild(bodyTank);
+            // root.AddChild(bodyTank);
+        }
+
+        private void PilotReset(float deltaTime)
+        {
+            if (isEntered == true)
+            {
+                X = bodyTank.XAbsolute;
+                Y = bodyTank.YAbsolute;
+            }
         }
 
         public Entity TankBody

@@ -24,7 +24,7 @@ namespace GraphicalTestApp
 
             OnUpdate += MoveUp;
             OnUpdate += MoveDown;
-
+            OnUpdate += Braking;
         }
 
         public TankBody(string path) : this(0, 0, path)
@@ -36,7 +36,11 @@ namespace GraphicalTestApp
         {
             if (Input.IsKeyDown(265))
             {
-                YAcceleration -= (0.1f * deltaTime);
+                YAcceleration = (-0.1f);
+                if (YVelocity < -0.3f)
+                {
+                    YVelocity = -0.3f;
+                }
             }
             if (Input.IsKeyReleased(265))
             {
@@ -48,11 +52,23 @@ namespace GraphicalTestApp
         {
             if (Input.IsKeyDown(264))
             {
-                YAcceleration += (0.1f * deltaTime);
+                YAcceleration = (0.1f);
+                if (YVelocity > 0.3f)
+                {
+                    YVelocity = 0.3f;
+                }
             }
             if (Input.IsKeyReleased(264))
             {
                 ZeroSpeed();
+            }
+        }
+
+        public void Braking(float deltaTime)
+        {
+            if (YVelocity > 0f)
+            {
+                YVelocity = 0f;
             }
         }
 

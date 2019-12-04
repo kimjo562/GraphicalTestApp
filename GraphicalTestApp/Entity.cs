@@ -44,8 +44,8 @@ namespace GraphicalTestApp
             //## Calculate velocity from acceleration ##//
             _velocity = _velocity + _acceleration * deltaTime;
             //## Calculate position from velocity ##//
-            X += _velocity.x;
-            Y += _velocity.y;
+            X += _velocity.x * deltaTime;
+            Y += _velocity.y * deltaTime;
 
             base.Update(deltaTime);
         }

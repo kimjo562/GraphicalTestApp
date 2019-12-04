@@ -56,6 +56,8 @@ namespace GraphicalTestApp
             {
                 Bullet bullet = new Bullet(XAbsolute, YAbsolute);
                 Parent.Parent.Parent.AddChild(bullet);
+
+
             }
         }
 
