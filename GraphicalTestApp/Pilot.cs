@@ -36,6 +36,7 @@ namespace GraphicalTestApp
             OnUpdate += EnterTank;
             OnUpdate += ExitTank;
 
+            OnUpdate += YesTest;
         }
 
         public Pilot(string path) : this(0, 0, path)
@@ -224,6 +225,13 @@ namespace GraphicalTestApp
                 bodyTank.YVelocity = 0f;
             }
         }
+
+        public void YesTest(float deltaTime)
+        {
+            Raylib.Raylib.DrawText("Top: " + (int)_hitbox.Top + "\nBottom: " + (int)_hitbox.Bottom + "\nRight: " + (int)_hitbox.Right + "\nLeft: " + (int)_hitbox.Left, (int)XAbsolute + 20, (int)YAbsolute + 20, 1, Raylib.Color.GOLD);
+        }
+
+
 
         public Entity TankBody
         {

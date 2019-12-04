@@ -49,7 +49,7 @@ namespace GraphicalTestApp
             //## Implement DetectCollision(AABB) ##//
             // return false;
 
-            if (!(Width < other.Left || Height < other.Top || Width > other.Right || Height > other.Bottom))
+            if (!(other.Left != Left || other.Left != Left || other.Left != Left || other.Bottom != Bottom))
             {
                 _color = Raylib.Color.RED;
               return true;

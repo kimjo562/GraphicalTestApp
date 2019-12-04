@@ -19,7 +19,7 @@ namespace GraphicalTestApp
 
             OnUpdate += RotateRight;
             OnUpdate += RotateLeft;
-            OnUpdate += Shoot;
+           // OnUpdate += Shoot;
 
         }
 
