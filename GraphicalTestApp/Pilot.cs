@@ -26,6 +26,10 @@ namespace GraphicalTestApp
             OnUpdate += MoveDown;
             OnUpdate += MoveLeft;
             OnUpdate += MoveRight;
+
+            OnUpdate += TurnLeft;
+            OnUpdate += TurnRight;
+
             OnUpdate += EnterTank;
             OnUpdate += ExitTank;
         }
@@ -62,7 +66,7 @@ namespace GraphicalTestApp
 
         public void MoveLeft(float deltaTime)
         {
-            if (Input.IsKeyDown(263))
+            if (Input.IsKeyDown(263) && isEntered == false)
             {
                 XAcceleration -= (0.1f * deltaTime);
             }
@@ -74,7 +78,7 @@ namespace GraphicalTestApp
 
         public void MoveRight(float deltaTime)
         {
-            if (Input.IsKeyDown(262))
+            if (Input.IsKeyDown(262) && isEntered == false)
             {
                 XAcceleration += (0.1f * deltaTime);
             }
@@ -127,8 +131,11 @@ namespace GraphicalTestApp
                 isEntered = true;
                 AddChild(bodyTank);
                 Parent.RemoveChild(bodyTank);
-                bodyTank.X = XAbsolute;
-                bodyTank.Y = YAbsolute;
+                bodyTank.X = 0;
+                bodyTank.Y = 0;
+
+               // RemoveChild(_hitbox);
+                RemoveChild(_texture);
             }
 
         }
@@ -140,6 +147,9 @@ namespace GraphicalTestApp
             {
                 RemoveChild(bodyTank);
                 Parent.AddChild(bodyTank);
+
+                AddChild(_texture);
+                AddChild(_hitbox);
                 isEntered = false;
             }
            // root.AddChild(bodyTank);

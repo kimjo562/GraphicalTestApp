@@ -25,8 +25,8 @@ namespace GraphicalTestApp
         {
             _image = RL.LoadImage(path);
             _texture = RL.LoadTextureFromImage(_image);
-            X = -Width;
-            Y = -Height;
+            X = -Width / 2;
+            Y = -Height / 2;
         }
 
         //Draw the Sprite to the screen

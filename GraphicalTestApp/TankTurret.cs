@@ -10,30 +10,22 @@ namespace GraphicalTestApp
     {
         private Sprite _texture;
         private AABB _hitbox;
-        public TankTurret(int x, int y, string path) : base(x, y)
+        public TankTurret(int x, int y) : base(x, y)
         {
-            _texture = new Sprite(path);
+            _texture = new Sprite("barrelBlue.png");
             _hitbox = new AABB(_texture.Width, _texture.Height);
             AddChild(_texture);
             AddChild(_hitbox);
 
             OnUpdate += RotateRight;
             OnUpdate += RotateLeft;
-            //OnUpdate += Orbit;
+            OnUpdate += Shoot;
 
         }
 
-        public TankTurret(string path) : this(0, 0, path)
+        public TankTurret(string path) : this(0, 0)
         {
 
-        }
-
-        private void Orbit(float deltaTime)
-        {
-            foreach (Actor child in _children)
-            {
-                child.Rotate(-2.5f * deltaTime);
-            }
         }
 
         public void RotateRight(float deltaTime)
@@ -45,7 +37,6 @@ namespace GraphicalTestApp
                     child.Rotate(-deltaTime * 1.5f);
                 }
             }
-
         }
 
         public void RotateLeft(float deltaTime)
@@ -57,7 +48,16 @@ namespace GraphicalTestApp
                     child.Rotate(deltaTime * 1.5f);
                 }
             }
-
         }
+
+        public void Shoot(float deltaTime)
+        {
+            if (Input.IsKeyDown(32))
+            {
+                Bullet bullet = new Bullet(XAbsolute, YAbsolute);
+                Parent.Parent.Parent.AddChild(bullet);
+            }
+        }
+
     }
 }
