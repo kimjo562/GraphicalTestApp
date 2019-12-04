@@ -19,7 +19,7 @@ namespace GraphicalTestApp
 
             OnUpdate += RotateRight;
             OnUpdate += RotateLeft;
-           // OnUpdate += Shoot;
+            OnUpdate += Shoot;
 
         }
 
@@ -52,14 +52,14 @@ namespace GraphicalTestApp
 
         public void Shoot(float deltaTime)
         {
-            if (Input.IsKeyDown(32))
+            if (Input.IsKeyDown(32) && Parent.Parent != null && Parent.Parent.Parent != null )
             {
-                Bullet bullet = new Bullet(XAbsolute, YAbsolute);
-                Parent.Parent.Parent.AddChild(bullet);
-
-
+                    Bullet bullet = new Bullet(XAbsolute, YAbsolute);
+                    Parent.Parent.Parent.AddChild(bullet);
             }
         }
+
+
 
     }
 }

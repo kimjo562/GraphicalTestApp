@@ -15,12 +15,13 @@ namespace GraphicalTestApp
 
         public Pilot(int x, int y, string path) : base(x, y)
         {
-            isEntered = false;
+            isEntered = true;
             _texture = new Sprite(path);
             bodyTank = new TankBody(150, 150, "tankBlue.png");
             _hitbox = new AABB(_texture.Width, _texture.Height);
             AddChild(_texture);
             AddChild(_hitbox);
+            AddChild(bodyTank);
 
             OnUpdate += TurnLeft;
             OnUpdate += TurnRight;
@@ -36,22 +37,12 @@ namespace GraphicalTestApp
             OnUpdate += EnterTank;
             OnUpdate += ExitTank;
 
-            OnUpdate += YesTest;
+            OnDraw += YesTest;
         }
 
         public Pilot(string path) : this(0, 0, path)
         {
 
-        }
-
-        // Overrides OnStart to do whatever before actually starting
-        public override void Update(float deltaTime)
-        {
-            if (!Started)
-            {
-                Parent.AddChild(bodyTank);
-            }
-            base.Update(deltaTime);
         }
 
         public void MoveUp(float deltaTime)
@@ -117,7 +108,6 @@ namespace GraphicalTestApp
 
         }
 
-
         public void TurnRight(float deltaTime)
         {
             if (Input.IsKeyDown(262) && isEntered == true)
@@ -149,18 +139,13 @@ namespace GraphicalTestApp
             
             YVelocity = 0;
             YAcceleration = 0;
-
-            //bodyTank.YAcceleration = 0;
-            //bodyTank.YVelocity = 0;
-            //bodyTank.XAcceleration = 0;
-            //bodyTank.XVelocity = 0;
         }
-
 
         // Pilot enters the tank and drives it
         private void EnterTank(float deltaTime)
         {
-            if (Input.IsKeyPressed(90) && bodyTank.CollisionCheck(_hitbox))
+            //&& bodyTank.CollisionCheck(_hitbox)
+            if (Input.IsKeyPressed(90) && XVelocity == 0 && YVelocity == 0)
             { 
                 Parent.RemoveChild(bodyTank);
                 AddChild(bodyTank);
@@ -190,7 +175,6 @@ namespace GraphicalTestApp
                 AddChild(_hitbox);
 
                 Rotate(-GetRotation());
-
                 isEntered = false;
             }
             // root.AddChild(bodyTank);
@@ -226,12 +210,10 @@ namespace GraphicalTestApp
             }
         }
 
-        public void YesTest(float deltaTime)
+        public void YesTest()
         {
-            Raylib.Raylib.DrawText("Top: " + (int)_hitbox.Top + "\nBottom: " + (int)_hitbox.Bottom + "\nRight: " + (int)_hitbox.Right + "\nLeft: " + (int)_hitbox.Left, (int)XAbsolute + 20, (int)YAbsolute + 20, 1, Raylib.Color.GOLD);
+            Raylib.Raylib.DrawText("Top: " + (int)_hitbox.Top + "\nBottom: " + (int)_hitbox.Bottom + "\nLeft: " + (int)_hitbox.Left + "\nRight: " + (int)_hitbox.Right, (int)XAbsolute + 20, (int)YAbsolute + 20, 1, Raylib.Color.GOLD);
         }
-
-
 
         public Entity TankBody
         {

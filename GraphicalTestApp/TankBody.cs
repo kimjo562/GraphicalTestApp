@@ -22,7 +22,7 @@ namespace GraphicalTestApp
             AddChild(_hitbox);
             AddChild(tankBarrel);
 
-            OnUpdate += YesTest;
+            OnDraw += YesTest;
         }
 
         public TankBody(string path) : this(0, 0, path)
@@ -35,9 +35,9 @@ namespace GraphicalTestApp
             return _hitbox.DetectCollision(other);
         }
 
-        public void YesTest(float deltaTime)
+        public void YesTest()
         {
-            Raylib.Raylib.DrawText("Top: " + (int)_hitbox.Top + "\nBottom: " + (int)_hitbox.Bottom + "\nRight: " + (int)_hitbox.Right + "\nLeft: " + (int)_hitbox.Left, (int)XAbsolute + 50, (int)YAbsolute - 35, 1, Raylib.Color.WHITE);
+            Raylib.Raylib.DrawText("Top: " + (int)_hitbox.Top + "\nBottom: " + (int)_hitbox.Bottom + "\nLeft: " + (int)_hitbox.Left + "\nRight: " + (int)_hitbox.Right, (int)XAbsolute + 50, (int)YAbsolute - 35, 1, Raylib.Color.WHITE);
         }
 
     }
