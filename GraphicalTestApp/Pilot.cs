@@ -22,18 +22,20 @@ namespace GraphicalTestApp
             AddChild(_texture);
             AddChild(_hitbox);
 
+            OnUpdate += TurnLeft;
+            OnUpdate += TurnRight;
+
             OnUpdate += MoveUp;
             OnUpdate += MoveDown;
             OnUpdate += MoveLeft;
             OnUpdate += MoveRight;
 
-            OnUpdate += TurnLeft;
-            OnUpdate += TurnRight;
-
             OnUpdate += PilotReset;
+            OnUpdate += Braking;
 
             OnUpdate += EnterTank;
             OnUpdate += ExitTank;
+
         }
 
         public Pilot(string path) : this(0, 0, path)
@@ -41,14 +43,30 @@ namespace GraphicalTestApp
 
         }
 
+        // Overrides OnStart to do whatever before actually starting
+        public override void Update(float deltaTime)
+        {
+            if (!Started)
+            {
+                Parent.AddChild(bodyTank);
+            }
+            base.Update(deltaTime);
+        }
 
         public void MoveUp(float deltaTime)
         {
-            if (Input.IsKeyDown(265) && isEntered == false)
+            if (Input.IsKeyDown(265))
             {
-                YAcceleration = (-100f);
+                if(isEntered)
+                {
+                    bodyTank.YAcceleration = (-100f);
+                }
+                else
+                {
+                    YAcceleration = (-100f);
+                }
             }
-            if (Input.IsKeyReleased(265))
+            if (Input.IsKeyReleased(265) && !isEntered)
             {
                 ZeroSpeed();
             }
@@ -56,11 +74,18 @@ namespace GraphicalTestApp
 
         public void MoveDown(float deltaTime)
         {
-            if (Input.IsKeyDown(264) && isEntered == false)
+            if (Input.IsKeyDown(264))
             {
-                YAcceleration = (100f);
+                if(isEntered)
+                {
+                    bodyTank.YAcceleration = (100f);
+                }
+                else
+                {
+                    YAcceleration = (100f);
+                }
             }
-            if (Input.IsKeyReleased(264))
+            if (Input.IsKeyReleased(264) && !isEntered)
             {
                 ZeroSpeed();
             }
@@ -72,7 +97,7 @@ namespace GraphicalTestApp
             {
                 XAcceleration = (-100f);
             }
-            if (Input.IsKeyReleased(263))
+            if (Input.IsKeyReleased(263) && !isEntered)
             {
                 ZeroSpeed();
             }
@@ -84,7 +109,7 @@ namespace GraphicalTestApp
             {
                 XAcceleration = (100f);
             }
-            if (Input.IsKeyReleased(262))
+            if (Input.IsKeyReleased(262) && !isEntered)
             {
                 ZeroSpeed();
             }
@@ -120,23 +145,30 @@ namespace GraphicalTestApp
         {
             XVelocity = 0;
             XAcceleration = 0;
+            
             YVelocity = 0;
             YAcceleration = 0;
+
+            //bodyTank.YAcceleration = 0;
+            //bodyTank.YVelocity = 0;
+            //bodyTank.XAcceleration = 0;
+            //bodyTank.XVelocity = 0;
         }
 
 
         // Pilot enters the tank and drives it
         private void EnterTank(float deltaTime)
         {
-            if (Input.IsKeyPressed(90))
+            if (Input.IsKeyPressed(90) && bodyTank.CollisionCheck(_hitbox))
             { 
-                AddChild(bodyTank);
                 Parent.RemoveChild(bodyTank);
+                AddChild(bodyTank);
                 bodyTank.X = 0;
                 bodyTank.Y = 0;
 
                 isEntered = true;
-                // RemoveChild(_hitbox);
+
+                RemoveChild(_hitbox);
                 RemoveChild(_texture);
             }
 
@@ -145,7 +177,7 @@ namespace GraphicalTestApp
         // Gets off the tank and pilot moves on its own
         private void ExitTank(float deltaTime)
         {
-            if (Input.IsKeyPressed(88))
+            if (Input.IsKeyPressed(88) && isEntered)
             {
                 RemoveChild(bodyTank);
                 Parent.AddChild(bodyTank);
@@ -169,6 +201,27 @@ namespace GraphicalTestApp
             {
                 X = bodyTank.XAbsolute;
                 Y = bodyTank.YAbsolute;
+
+                bodyTank.X = 0;
+                bodyTank.Y = 0;
+            }
+        }
+
+        public void Braking(float deltaTime)
+        {
+
+            // Up Controls
+            if (bodyTank.YVelocity < -100f)
+            {
+                bodyTank.YVelocity = -100f;
+            }
+
+            // -----------------------------------------
+
+            // Down Controls
+            if (bodyTank.YVelocity > 0f)
+            {
+                bodyTank.YVelocity = 0f;
             }
         }
 

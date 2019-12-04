@@ -21,10 +21,6 @@ namespace GraphicalTestApp
             AddChild(_texture);
             AddChild(_hitbox);
             AddChild(tankBarrel);
-
-            OnUpdate += MoveUp;
-            OnUpdate += MoveDown;
-            OnUpdate += Braking;
         }
 
         public TankBody(string path) : this(0, 0, path)
@@ -32,53 +28,10 @@ namespace GraphicalTestApp
 
         }
 
-        public void MoveUp(float deltaTime)
+        public bool CollisionCheck(AABB other)
         {
-            if (Input.IsKeyDown(265))
-            {
-                YAcceleration = (-0.1f);
-                if (YVelocity < -0.3f)
-                {
-                    YVelocity = -0.3f;
-                }
-            }
-            if (Input.IsKeyReleased(265))
-            {
-                ZeroSpeed();
-            }
+            return _hitbox.DetectCollision(other);
         }
 
-        public void MoveDown(float deltaTime)
-        {
-            if (Input.IsKeyDown(264))
-            {
-                YAcceleration = (0.1f);
-                if (YVelocity > 0.3f)
-                {
-                    YVelocity = 0.3f;
-                }
-            }
-            if (Input.IsKeyReleased(264))
-            {
-                ZeroSpeed();
-            }
-        }
-
-        public void Braking(float deltaTime)
-        {
-            if (YVelocity > 0f)
-            {
-                YVelocity = 0f;
-            }
-        }
-
-
-        public void ZeroSpeed()
-        {
-            XVelocity = 0;
-            XAcceleration = 0;
-            YVelocity = 0;
-            YAcceleration = 0;
-        }
     }
 }

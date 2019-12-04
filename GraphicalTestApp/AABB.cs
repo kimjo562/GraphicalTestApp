@@ -11,6 +11,8 @@ namespace GraphicalTestApp
         public float Width { get; set; } = 1;
         public float Height { get; set; } = 1;
 
+        private Raylib.Color _color = Raylib.Color.GREEN;
+
         //Returns the Y coordinate at the top of the box
         public float Top
         {
@@ -46,7 +48,17 @@ namespace GraphicalTestApp
         {
             //## Implement DetectCollision(AABB) ##//
             // return false;
-            return !(Width < other.Left || Height < other.Top || Width > other.Right || Height > other.Bottom);
+
+            if (!(Width < other.Left || Height < other.Top || Width > other.Right || Height > other.Bottom))
+            {
+                _color = Raylib.Color.RED;
+              return true;
+            }
+            else
+            {
+                _color = Raylib.Color.BLUE;
+              return false;
+            }
         }
 
         public bool DetectCollision(Vector3 point)
@@ -65,7 +77,7 @@ namespace GraphicalTestApp
                 YAbsolute - Height / 2,
                 Width,
                 Height);
-            Raylib.Raylib.DrawRectangleLinesEx(rec, 1, Raylib.Color.RED);
+            Raylib.Raylib.DrawRectangleLinesEx(rec, 1, _color);
             base.Draw();
         }
     }
