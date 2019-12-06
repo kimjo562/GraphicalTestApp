@@ -15,7 +15,7 @@ namespace GraphicalTestApp
         public TankBody(int x, int y, string path) : base(x, y)
         {
             _texture = new Sprite(path);
-            tankBarrel = new TankTurret(0, 0);
+            tankBarrel = new TankTurret(0, 0, "barrelBlue.png");
 
             _hitbox = new AABB(_texture.Width, _texture.Height);
             AddChild(_texture);

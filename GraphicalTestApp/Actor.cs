@@ -70,6 +70,31 @@ namespace GraphicalTestApp
             get { return _globalTransform.m2x3; }
         }
 
+
+        public Vector3 GetDirection()
+        {
+            return new Vector3(_localTransform.m1x2, _localTransform.m1x1, 0);
+        }
+
+        public Vector3 GetDirectionAbsolute()
+        {
+            return new Vector3(_globalTransform.m1x2, _globalTransform.m1x1, 0);
+        }
+
+        public float getM1x1
+        {
+           get { return _globalTransform.m1x1; }
+        }
+
+        public float getM1x2
+        {
+            get { return _globalTransform.m1x2; }
+        }
+
+
+
+
+
         public float GetRotationAbsolute()
         {
             //## Implement getting the rotation of _globalTransform ##//

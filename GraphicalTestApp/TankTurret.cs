@@ -9,13 +9,15 @@ namespace GraphicalTestApp
     class TankTurret : Entity
     {
         private Sprite _texture;
-        private AABB _hitbox;
-        public TankTurret(int x, int y) : base(x, y)
+        // private AABB _hitbox;
+        public TankTurret(int x, int y, string path) : base(x, y)
         {
-            _texture = new Sprite("barrelBlue.png");
-            _hitbox = new AABB(_texture.Width, _texture.Height);
+            _texture = new Sprite(path);
+            _texture.Y = -5f;
+            Rotate((float)Math.PI);
+            // _hitbox = new AABB(_texture.Width, _texture.Height);
             AddChild(_texture);
-            AddChild(_hitbox);
+            // AddChild(_hitbox);
 
             OnUpdate += RotateRight;
             OnUpdate += RotateLeft;
@@ -23,42 +25,44 @@ namespace GraphicalTestApp
 
         }
 
-        public TankTurret(string path) : this(0, 0)
+        public TankTurret(string path) : this(0, 0, path)
         {
 
         }
 
         public void RotateRight(float deltaTime)
         {
-            if (Input.IsKeyDown(69))
+            if (Input.IsKeyDown(81))
             {
-                foreach (Actor child in _children)
-                {
-                    child.Rotate(-deltaTime * 1.5f);
-                }
+                Rotate(-deltaTime * 1.5f);
             }
         }
 
         public void RotateLeft(float deltaTime)
         {
-            if (Input.IsKeyDown(81))
+            if (Input.IsKeyDown(69))
             {
-                foreach (Actor child in _children)
-                {
-                    child.Rotate(deltaTime * 1.5f);
-                }
+                Rotate(deltaTime * 1.5f);
+
             }
         }
 
         public void Shoot(float deltaTime)
         {
-            if (Input.IsKeyDown(32) && Parent.Parent != null && Parent.Parent.Parent != null )
+            if (Input.IsKeyDown(32) && Parent.Parent != null && Parent.Parent.Parent != null)
             {
-                    Bullet bullet = new Bullet(XAbsolute, YAbsolute);
-                    Parent.Parent.Parent.AddChild(bullet);
+                Bullet bullet = new Bullet(XAbsolute, YAbsolute);
+                Parent.Parent.Parent.AddChild(bullet);
+
+                Vector3 bulletDirection = GetDirectionAbsolute() * 250f;
+
+                bullet.XVelocity = bulletDirection.x;
+                bullet.YVelocity = bulletDirection.y;
+
+
+                bullet.Y = YAbsolute + -45f;
             }
         }
-
 
 
     }
