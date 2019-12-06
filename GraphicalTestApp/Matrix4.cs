@@ -51,9 +51,9 @@ namespace GraphicalTestApp
         {
             return new Matrix4(
                 (lhs.m1x1 * rhs.m1x1) + (lhs.m1x2 * rhs.m2x1) + (lhs.m1x3 * rhs.m3x1) + (lhs.m1x4 * rhs.m4x1),
-                (lhs.m1x1 * rhs.m1x2) + (lhs.m1x2 * rhs.m2x2) + (lhs.m1x3 * rhs.m2x2) + (lhs.m2x4 * rhs.m4x2),  // First Matrix
-                (lhs.m1x1 * rhs.m1x3) + (lhs.m1x2 * rhs.m2x3) + (lhs.m1x3 * rhs.m3x3) + (lhs.m3x4 * rhs.m4x3),
-                (lhs.m1x1 * rhs.m1x4) + (lhs.m1x2 * rhs.m2x4) + (lhs.m1x3 * rhs.m3x4) + (lhs.m4x4 * rhs.m4x4),
+                (lhs.m1x1 * rhs.m1x2) + (lhs.m1x2 * rhs.m2x2) + (lhs.m1x3 * rhs.m3x2) + (lhs.m1x4 * rhs.m4x2),  // First Matrix
+                (lhs.m1x1 * rhs.m1x3) + (lhs.m1x2 * rhs.m2x3) + (lhs.m1x3 * rhs.m3x3) + (lhs.m1x4 * rhs.m4x3),
+                (lhs.m1x1 * rhs.m1x4) + (lhs.m1x2 * rhs.m2x4) + (lhs.m1x3 * rhs.m3x4) + (lhs.m1x4 * rhs.m4x4),
 
                 (lhs.m2x1 * rhs.m1x1) + (lhs.m2x2 * rhs.m2x1) + (lhs.m2x3 * rhs.m3x1) + (lhs.m2x4 * rhs.m4x1),
                 (lhs.m2x1 * rhs.m1x2) + (lhs.m2x2 * rhs.m2x2) + (lhs.m2x3 * rhs.m3x2) + (lhs.m2x4 * rhs.m4x2),  // Second Matrix
