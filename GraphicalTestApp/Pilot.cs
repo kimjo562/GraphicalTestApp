@@ -45,6 +45,7 @@ namespace GraphicalTestApp
 
         }
 
+        // Allows the pilot to move up
         public void MoveUp(float deltaTime)
         {
             if (Input.IsKeyDown(265))
@@ -64,6 +65,7 @@ namespace GraphicalTestApp
             }
         }
 
+        // Allows the pilot to move down
         public void MoveDown(float deltaTime)
         {
             if (Input.IsKeyDown(264))
@@ -83,6 +85,7 @@ namespace GraphicalTestApp
             }
         }
 
+        // Allows the pilot to move left
         public void MoveLeft(float deltaTime)
         {
             if (Input.IsKeyDown(263) && isEntered == false)
@@ -95,6 +98,7 @@ namespace GraphicalTestApp
             }
         }
 
+        // Allows the pilot to move right
         public void MoveRight(float deltaTime)
         {
             if (Input.IsKeyDown(262) && isEntered == false)
@@ -108,6 +112,7 @@ namespace GraphicalTestApp
 
         }
 
+        // Allows the tank to turn right
         public void TurnRight(float deltaTime)
         {
             if (Input.IsKeyDown(262) && isEntered == true)
@@ -120,6 +125,7 @@ namespace GraphicalTestApp
             }
         }
 
+        // Allows the tank to turn left
         public void TurnLeft(float deltaTime)
         {
             if (Input.IsKeyDown(263) && isEntered == true)
@@ -132,6 +138,7 @@ namespace GraphicalTestApp
             }
         }
 
+        // Resets the movement
         public void ZeroSpeed()
         {
             XVelocity = 0;
@@ -144,9 +151,15 @@ namespace GraphicalTestApp
         // Pilot enters the tank and drives it
         private void EnterTank(float deltaTime)
         {
-            //&& bodyTank.CollisionCheck(_hitbox)
-            if (Input.IsKeyPressed(90) && XVelocity == 0 && YVelocity == 0)
-            { 
+            //
+            if (Input.IsKeyPressed(90) && XVelocity == 0 && YVelocity == 0 && bodyTank.CollisionCheck(_hitbox))
+            {
+                Rotate(bodyTank.GetRotation());
+                bodyTank.Rotate(-bodyTank.GetRotation());
+
+                bodyTank.XVelocity = 0;
+                bodyTank.YVelocity = 0;
+
                 Parent.RemoveChild(bodyTank);
                 AddChild(bodyTank);
                 bodyTank.X = 0;
@@ -174,12 +187,20 @@ namespace GraphicalTestApp
                 AddChild(_texture);
                 AddChild(_hitbox);
 
+                // Grabs Tank's Rotation
+                bodyTank.Rotate(GetRotation());
+                // Grabs Pilots Rotation
                 Rotate(-GetRotation());
+
+                Vector3 tankDirection = bodyTank.GetDirectionAbsolute() * 250f;
+                bodyTank.XVelocity = -tankDirection.x;
+                bodyTank.YVelocity = tankDirection.y;
+
                 isEntered = false;
             }
-            // root.AddChild(bodyTank);
         }
 
+        // Resets the Pilot back to the tank and recenters
         private void PilotReset(float deltaTime)
         {
             if (isEntered == true)
@@ -192,6 +213,7 @@ namespace GraphicalTestApp
             }
         }
 
+        // Allows the Tank to slow down and stop
         public void Braking(float deltaTime)
         {
 
@@ -215,6 +237,7 @@ namespace GraphicalTestApp
             Raylib.Raylib.DrawText("Top: " + (int)_hitbox.Top + "\nBottom: " + (int)_hitbox.Bottom + "\nLeft: " + (int)_hitbox.Left + "\nRight: " + (int)_hitbox.Right, (int)XAbsolute + 20, (int)YAbsolute + 20, 1, Raylib.Color.GOLD);
         }
 
+        // Calls for bodyTank
         public Entity TankBody
         {
             get { return bodyTank; }

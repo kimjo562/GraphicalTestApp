@@ -15,9 +15,7 @@ namespace GraphicalTestApp
             _texture = new Sprite(path);
             _texture.Y = -5f;
             Rotate((float)Math.PI);
-            // _hitbox = new AABB(_texture.Width, _texture.Height);
             AddChild(_texture);
-            // AddChild(_hitbox);
 
             OnUpdate += RotateRight;
             OnUpdate += RotateLeft;
@@ -49,18 +47,17 @@ namespace GraphicalTestApp
 
         public void Shoot(float deltaTime)
         {
-            if (Input.IsKeyDown(32) && Parent.Parent != null && Parent.Parent.Parent != null)
+            if (Input.IsKeyPressed(32) && Parent.Parent != null && Parent.Parent.Parent != null)
             {
                 Bullet bullet = new Bullet(XAbsolute, YAbsolute);
                 Parent.Parent.Parent.AddChild(bullet);
 
+                bullet.Rotate(GetRotationAbsolute());
                 Vector3 bulletDirection = GetDirectionAbsolute() * 250f;
-
+          
                 bullet.XVelocity = bulletDirection.x;
                 bullet.YVelocity = bulletDirection.y;
-
-
-                bullet.Y = YAbsolute + -45f;
+                
             }
         }
 
