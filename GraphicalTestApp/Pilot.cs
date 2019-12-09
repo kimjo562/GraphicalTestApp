@@ -196,6 +196,10 @@ namespace GraphicalTestApp
                 bodyTank.XVelocity = -tankDirection.x;
                 bodyTank.YVelocity = tankDirection.y;
 
+                bodyTank.XVelocity = 0;
+                bodyTank.YVelocity = 0;
+                bodyTank.YAcceleration = 0;
+
                 isEntered = false;
             }
         }

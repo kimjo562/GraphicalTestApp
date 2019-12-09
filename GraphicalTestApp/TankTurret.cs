@@ -30,7 +30,7 @@ namespace GraphicalTestApp
 
         public void RotateRight(float deltaTime)
         {
-            if (Input.IsKeyDown(81))
+            if (Input.IsKeyDown(81) && Parent.Parent.Parent != null)
             {
                 Rotate(-deltaTime * 1.5f);
             }
@@ -38,7 +38,7 @@ namespace GraphicalTestApp
 
         public void RotateLeft(float deltaTime)
         {
-            if (Input.IsKeyDown(69))
+            if (Input.IsKeyDown(69) && Parent.Parent.Parent != null)
             {
                 Rotate(deltaTime * 1.5f);
 
