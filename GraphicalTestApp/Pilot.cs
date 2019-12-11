@@ -37,6 +37,8 @@ namespace GraphicalTestApp
             OnUpdate += EnterTank;
             OnUpdate += ExitTank;
 
+            OnUpdate += WrapScreen;
+
             OnDraw += YesTest;
         }
 
@@ -233,6 +235,31 @@ namespace GraphicalTestApp
             if (bodyTank.YVelocity > 0f)
             {
                 bodyTank.YVelocity = 0f;
+            }
+        }
+
+        public void WrapScreen(float deltaTime)
+        {
+            if (XAbsolute < 0 - 45)
+            {
+                X = 1280 + 45;
+
+            }
+            if (XAbsolute > 1280 + 45)
+            {
+                X = 0 - 45;
+
+            }
+
+            if (YAbsolute < 0 - 45)
+            {
+                Y = 780 + 45;
+
+            }
+            if (YAbsolute > 780 + 45)
+            {
+                Y = 0 - 45;
+
             }
         }
 

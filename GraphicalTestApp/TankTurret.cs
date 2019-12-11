@@ -53,11 +53,13 @@ namespace GraphicalTestApp
                 Parent.Parent.Parent.AddChild(bullet);
 
                 bullet.Rotate(GetRotationAbsolute());
-                Vector3 bulletDirection = GetDirectionAbsolute() * 250f;
-          
-                bullet.XVelocity = bulletDirection.x;
-                bullet.YVelocity = bulletDirection.y;
-                
+                Vector3 bulletDirection = GetDirectionAbsolute() * 50f;
+
+                bullet.XVelocity = bulletDirection.x * 10f;
+                bullet.YVelocity = bulletDirection.y * 10f;
+
+                bullet.X += bulletDirection.x;
+                bullet.Y += bulletDirection.y;
             }
         }
 
