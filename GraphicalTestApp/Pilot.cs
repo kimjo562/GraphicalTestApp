@@ -176,7 +176,7 @@ namespace GraphicalTestApp
         }
 
         // Gets off the tank and pilot moves on its own
-        private void ExitTank(float deltaTime)
+        public void ExitTank(float deltaTime)
         {
             if (Input.IsKeyPressed(88) && isEntered)
             {
@@ -238,6 +238,25 @@ namespace GraphicalTestApp
             }
         }
 
+        public bool DetectCollision(AABB other)
+        {
+            if(_hitbox.DetectCollision(other))
+            {
+                RemoveChild(_hitbox);
+                RemoveChild(_texture);
+                if(Parent != null)
+                {
+                    Parent.RemoveChild(this);
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
         public void WrapScreen(float deltaTime)
         {
             if (XAbsolute < 0 - 45)
@@ -266,6 +285,11 @@ namespace GraphicalTestApp
         public void YesTest()
         {
             Raylib.Raylib.DrawText("Top: " + (int)_hitbox.Top + "\nBottom: " + (int)_hitbox.Bottom + "\nLeft: " + (int)_hitbox.Left + "\nRight: " + (int)_hitbox.Right, (int)XAbsolute + 20, (int)YAbsolute + 20, 1, Raylib.Color.GOLD);
+        }
+
+        public List<Actor> GetChildren
+        {
+            get { return _children; }
         }
 
     }

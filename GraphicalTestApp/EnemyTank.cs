@@ -37,7 +37,7 @@ namespace GraphicalTestApp
 
         public void MoveUp(float deltaTime)
         {
-                YVelocity = (-175f);
+                YVelocity = (-150f);
         }
 
         public void HitDetection(float deltaTime)
@@ -56,16 +56,16 @@ namespace GraphicalTestApp
                         X = random.Next(1280 + 1);
                         Y = 0;
 
-                        XVelocity = 0;
-                        YVelocity = -175f;
+                        XVelocity = -175f;
+                        YVelocity = 0;
                         break;
 
                     case 1: // Bottom
                         X = random.Next(1280 + 1);
                         Y = 786;
 
-                        XVelocity = 0;
-                        YVelocity = 175f;
+                        XVelocity = 175f;
+                        YVelocity = 0;
                         break;
 
                     case 2:

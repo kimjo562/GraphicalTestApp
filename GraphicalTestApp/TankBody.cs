@@ -29,6 +29,25 @@ namespace GraphicalTestApp
 
         }
 
+        public bool DetectCollision(AABB other)
+        {
+            if (_hitbox.DetectCollision(other))
+            {
+                RemoveChild(_hitbox);
+                RemoveChild(_texture);
+                RemoveChild(tankBarrel);
+                if (Parent != null)
+                {
+                    Parent.RemoveChild(this);
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool CollisionCheck(AABB other)
         {
             return _hitbox.DetectCollision(other);

@@ -70,7 +70,6 @@ namespace GraphicalTestApp
             get { return _globalTransform.m2x3; }
         }
 
-
         public Vector3 GetDirection()
         {
             return new Vector3(_localTransform.m1x2, _localTransform.m1x1, 0);
@@ -81,17 +80,7 @@ namespace GraphicalTestApp
             return new Vector3(_globalTransform.m1x2, _globalTransform.m1x1, 0);
         }
 
-        public float getM1x1
-        {
-            get { return _globalTransform.m1x1; }
-        }
-
-        public float getM1x2
-        {
-            get { return _globalTransform.m1x2; }
-        }
-
-        public List<Actor> GetChild
+        public List<Actor> GetChildren
         {
             get { return _children; }
         }
@@ -178,18 +167,6 @@ namespace GraphicalTestApp
             {
                 child.UpdateTransform();
             }
-        }
-
-        // Grabs the m1x1 position
-        public float Getm1x1
-        {
-            get { return _globalTransform.m1x1; }
-        }
-
-        // Grabs the m1x2 position
-        public float Getm1x2
-        {
-            get { return _globalTransform.m1x2; }
         }
 
         //Call the OnStart events of the Actor and its children
