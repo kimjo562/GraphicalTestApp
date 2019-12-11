@@ -18,6 +18,15 @@ namespace GraphicalTestApp
             Pilot pilot = new Pilot(300, 300, "pilot.png");
             root.AddChild(pilot);
 
+            EnemyTank enemy = new EnemyTank(1000, 500, "ufoRed.png");
+            root.AddChild(enemy);
+
+            EnemyTank enemy2 = new EnemyTank(450, 600, "ufoRed.png");
+            root.AddChild(enemy2);
+
+            EnemyTank enemy3 = new EnemyTank(600, 300, "ufoRed.png");
+            root.AddChild(enemy3);
+
             //## Set up game here ##//
 
             game.Run();

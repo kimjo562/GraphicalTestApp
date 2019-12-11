@@ -83,7 +83,7 @@ namespace GraphicalTestApp
 
         public float getM1x1
         {
-           get { return _globalTransform.m1x1; }
+            get { return _globalTransform.m1x1; }
         }
 
         public float getM1x2
@@ -91,9 +91,10 @@ namespace GraphicalTestApp
             get { return _globalTransform.m1x2; }
         }
 
-
-
-
+        public List<Actor> GetChild
+        {
+            get { return _children; }
+        }
 
         public float GetRotationAbsolute()
         {

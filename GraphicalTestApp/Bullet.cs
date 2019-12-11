@@ -39,5 +39,9 @@ namespace GraphicalTestApp
             }
         }
 
+        public bool CollisionCheck(AABB other)
+        {
+            return _hitboxBullet.DetectCollision(other);
+        }
     }
 }

@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="Actor.cs" />
     <Compile Include="Bullet.cs" />
+    <Compile Include="EnemyTank.cs" />
+    <Compile Include="EnemyTankTurret.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="AABB.cs" />

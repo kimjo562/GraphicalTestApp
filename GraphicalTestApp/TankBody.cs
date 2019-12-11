@@ -16,7 +16,6 @@ namespace GraphicalTestApp
         {
             _texture = new Sprite(path);
             tankBarrel = new TankTurret(0, 0, "barrelBlue.png");
-
             _hitbox = new AABB(_texture.Width, _texture.Height);
             AddChild(_texture);
             AddChild(_hitbox);

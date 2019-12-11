@@ -268,12 +268,5 @@ namespace GraphicalTestApp
             Raylib.Raylib.DrawText("Top: " + (int)_hitbox.Top + "\nBottom: " + (int)_hitbox.Bottom + "\nLeft: " + (int)_hitbox.Left + "\nRight: " + (int)_hitbox.Right, (int)XAbsolute + 20, (int)YAbsolute + 20, 1, Raylib.Color.GOLD);
         }
 
-        // Calls for bodyTank
-        public Entity TankBody
-        {
-            get { return bodyTank; }
-        }
-
-
     }
 }
