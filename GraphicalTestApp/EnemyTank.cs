@@ -27,7 +27,7 @@ namespace GraphicalTestApp
             OnUpdate += RandomizedPosition;
             OnUpdate += HitDetection;
 
-            OnDraw += YesTest;
+            OnDraw += PositionFinder;
         }
 
         public EnemyTank(string path) : this(0, 0, path)
@@ -94,7 +94,7 @@ namespace GraphicalTestApp
         }
 
 
-        public void YesTest()
+        public void PositionFinder()
         {
             Raylib.Raylib.DrawText("Top: " + (int)_hitbox.Top + "\nBottom: " + (int)_hitbox.Bottom + "\nLeft: " + (int)_hitbox.Left + "\nRight: " + (int)_hitbox.Right, (int)XAbsolute + 50, (int)YAbsolute - 35, 1, Raylib.Color.WHITE);
         }

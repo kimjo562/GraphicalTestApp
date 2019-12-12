@@ -11,7 +11,7 @@ namespace GraphicalTestApp
         private Sprite _texture;
         private AABB _hitbox;
         private TankBody bodyTank;
-        bool isEntered = true;
+        private bool isEntered = true;
 
         public Pilot(int x, int y, string path) : base(x, y)
         {
@@ -39,7 +39,7 @@ namespace GraphicalTestApp
 
             OnUpdate += WrapScreen;
 
-            OnDraw += YesTest;
+            OnDraw += PositionFinder;
         }
 
         public Pilot(string path) : this(0, 0, path)
@@ -153,7 +153,6 @@ namespace GraphicalTestApp
         // Pilot enters the tank and drives it
         private void EnterTank(float deltaTime)
         {
-            //
             if (Input.IsKeyPressed(90) && XVelocity == 0 && YVelocity == 0 && bodyTank.CollisionCheck(_hitbox))
             {
                 Rotate(bodyTank.GetRotation());
@@ -282,7 +281,7 @@ namespace GraphicalTestApp
             }
         }
 
-        public void YesTest()
+        public void PositionFinder()
         {
             Raylib.Raylib.DrawText("Top: " + (int)_hitbox.Top + "\nBottom: " + (int)_hitbox.Bottom + "\nLeft: " + (int)_hitbox.Left + "\nRight: " + (int)_hitbox.Right, (int)XAbsolute + 20, (int)YAbsolute + 20, 1, Raylib.Color.GOLD);
         }
