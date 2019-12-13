@@ -237,6 +237,7 @@ namespace GraphicalTestApp
             }
         }
 
+        // Checks to see if the collision of pilot
         public bool DetectCollision(AABB other)
         {
             if(_hitbox.DetectCollision(other))
@@ -256,6 +257,7 @@ namespace GraphicalTestApp
 
         }
 
+        // Lets the pilot wrap to the other side of the screen
         public void WrapScreen(float deltaTime)
         {
             if (XAbsolute < 0 - 45)
@@ -281,11 +283,13 @@ namespace GraphicalTestApp
             }
         }
 
+        // Shows the pilots position 
         public void PositionFinder()
         {
             Raylib.Raylib.DrawText("Top: " + (int)_hitbox.Top + "\nBottom: " + (int)_hitbox.Bottom + "\nLeft: " + (int)_hitbox.Left + "\nRight: " + (int)_hitbox.Right, (int)XAbsolute + 20, (int)YAbsolute + 20, 1, Raylib.Color.GOLD);
         }
 
+        // Gets call function _children
         public List<Actor> GetChildren
         {
             get { return _children; }

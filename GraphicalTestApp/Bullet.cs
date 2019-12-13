@@ -21,6 +21,7 @@ namespace GraphicalTestApp
             OnUpdate += DestroyBullet;
         }
 
+        // Checks to see if bullets hit the pilot or Pilot's Tank
         public void HitCollision(float deltaTime)
         {
             foreach (Actor checkHit in Parent.GetChildren)
@@ -78,6 +79,7 @@ namespace GraphicalTestApp
             }
         }
 
+        // Bullet Deconstructor
         ~Bullet()
         {
             if (Parent != null)
@@ -89,6 +91,7 @@ namespace GraphicalTestApp
             RemoveChild(_hitboxBullet);
         }
 
+        // Destroys the bullet when it hits off screen
         public void DestroyBullet(float deltaTime)
         {
             if (X < 0 || Y < 0 || X > 1280 || Y > 768)
@@ -101,6 +104,7 @@ namespace GraphicalTestApp
             }
         }
 
+        // Checks bullet Collision
         public bool CollisionCheck(AABB other)
         {
             return _hitboxBullet.DetectCollision(other);

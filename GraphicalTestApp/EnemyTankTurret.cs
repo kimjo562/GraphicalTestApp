@@ -31,12 +31,13 @@ namespace GraphicalTestApp
 
         }
 
+        // Enemy Tanks Turret rotates right
         public void RotateRight(float deltaTime)
         {
             Rotate(-deltaTime * 2.5f);
         }
 
-
+        // Lets the enemy tank shoot
         public void Shoot(float deltaTime)
         {
             if(_timetoShoot.Seconds >= _shootInterval)

@@ -27,6 +27,7 @@ namespace GraphicalTestApp
 
         }
 
+        // Lets the Tank Barrel Rotate Right
         public void RotateRight(float deltaTime)
         {
             if (Input.IsKeyDown(81) && Parent.Parent.Parent != null)
@@ -35,6 +36,7 @@ namespace GraphicalTestApp
             }
         }
 
+        // Lets the Tank Barrel Rotate Left
         public void RotateLeft(float deltaTime)
         {
             if (Input.IsKeyDown(69) && Parent.Parent.Parent != null)
@@ -44,6 +46,7 @@ namespace GraphicalTestApp
             }
         }
 
+        // Lets the Tank Barrel Shoot
         public void Shoot(float deltaTime)
         {
             if (Input.IsKeyPressed(32) && Parent.Parent != null && Parent.Parent.Parent != null)

@@ -29,6 +29,7 @@ namespace GraphicalTestApp
 
         }
 
+        // Checks the Pilot's Tank Collision
         public bool DetectCollision(AABB other)
         {
             if (_hitbox.DetectCollision(other))
@@ -48,11 +49,13 @@ namespace GraphicalTestApp
             }
         }
 
+        // Checks if the Tank AABB is hit
         public bool CollisionCheck(AABB other)
         {
             return _hitbox.DetectCollision(other);
         }
 
+        // Shows the Tanks Position
         public void PositionFinder()
         {
             Raylib.Raylib.DrawText("Top: " + (int)_hitbox.Top + "\nBottom: " + (int)_hitbox.Bottom + "\nLeft: " + (int)_hitbox.Left + "\nRight: " + (int)_hitbox.Right, (int)XAbsolute + 50, (int)YAbsolute - 35, 1, Raylib.Color.WHITE);

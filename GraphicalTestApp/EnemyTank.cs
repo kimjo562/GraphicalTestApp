@@ -35,17 +35,20 @@ namespace GraphicalTestApp
 
         }
 
+        // Lets the Enemy Tank Move Up
         public void MoveUp(float deltaTime)
         {
                 YVelocity = (-150f);
         }
 
+        // Not implemented
         public void HitDetection(float deltaTime)
         {
 
 
         }
 
+        // When screen wrapping they will exit from another direction at random
         public void RandomizedPosition(float deltaTime)
         {
             int spawnLocation = random.Next(4);
@@ -87,13 +90,13 @@ namespace GraphicalTestApp
 
         }
 
-
+        // Checks enemy Tanks Collision
         public bool CollisionCheck(AABB other)
         {
             return _hitbox.DetectCollision(other);
         }
 
-
+        // Shows the position of the enemy tank
         public void PositionFinder()
         {
             Raylib.Raylib.DrawText("Top: " + (int)_hitbox.Top + "\nBottom: " + (int)_hitbox.Bottom + "\nLeft: " + (int)_hitbox.Left + "\nRight: " + (int)_hitbox.Right, (int)XAbsolute + 50, (int)YAbsolute - 35, 1, Raylib.Color.WHITE);

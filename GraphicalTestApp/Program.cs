@@ -14,10 +14,12 @@ namespace GraphicalTestApp
 
             Actor root = new Actor();
             game.Root = root;
-
+            
+            // Spawns the Pilot
             Pilot pilot = new Pilot(300, 300, "pilot.png");
             root.AddChild(pilot);
 
+            // Spawns Enemy Tanks V V V
             EnemyTank enemy = new EnemyTank(1000, 500, "ufoRed.png");
             root.AddChild(enemy);
 
